@@ -214,13 +214,17 @@
             stopScanner();
             showLoading('Mencatat Data Patroli...');
 
+            // Rangkai nilai koordinat menjadi format link Google Maps
+            const urlGoogleMaps = `https://www.google.com/maps?q=${currentLat},${currentLng}`;
+
             const payload = {
                 data: {
                     username: currentUser.username,
                     nama: currentUser.nama,
                     qrCode: decodedText, 
                     lat: currentLat,    
-                    lng: currentLng
+                    lng: currentLng,
+                    mapsUrl: urlGoogleMaps // Masukkan link ke dalam payload
                 }
             };
 
