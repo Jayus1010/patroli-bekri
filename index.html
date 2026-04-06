@@ -13,7 +13,7 @@
 </head>
 <body class="bg-gray-200 min-h-screen text-gray-800 font-sans">
     
-    <div id="app" class="max-w-md mx-auto bg-white min-h-screen shadow-lg relative overflow-hidden">
+    <div id="app" class="max-w-md mx-auto bg-white min-h-screen shadow-lg relative overflow-hidden flex flex-col">
         <div id="loading" class="absolute inset-0 bg-white/90 z-50 flex-col justify-center items-center">
             <div class="animate-spin rounded-full h-12 w-12 border-b-4 border-blue-800 mb-4"></div>
             <p class="text-blue-800 font-bold animate-pulse" id="loading-text">Memproses...</p>
@@ -25,7 +25,7 @@
         </header>
 
         <!-- HALAMAN LOGIN -->
-        <div id="login-view" class="p-6 mt-4">
+        <div id="login-view" class="p-6 mt-4 flex-grow flex flex-col">
             <div class="space-y-5 bg-slate-50 p-6 rounded-xl border border-slate-100">
                 <div>
                     <label class="block text-sm font-semibold mb-1 text-slate-700">NIK / Username</label>
@@ -39,10 +39,15 @@
                     Masuk Bertugas
                 </button>
             </div>
+            
+            <!-- Tambahan Watermark Created By -->
+            <div class="mt-auto pt-8 pb-4 text-center">
+                <p class="text-xs text-slate-400 font-medium tracking-wider">created by bang jay 2026</p>
+            </div>
         </div>
 
         <!-- HALAMAN DASHBOARD / SCANNER -->
-        <div id="dashboard-view" class="p-6 hidden flex-col h-full">
+        <div id="dashboard-view" class="p-6 hidden flex-col flex-grow">
             <div class="bg-blue-50 border-l-4 border-blue-700 rounded-r-lg p-4 mb-6 shadow-sm">
                 <p class="text-sm text-slate-600">Petugas Jaga:</p>
                 <p class="text-xl font-extrabold text-slate-800" id="user-name-display">Nama Anggota</p>
@@ -75,7 +80,6 @@
         // ==========================================
         // KONFIGURASI API BACKEND
         // ==========================================
-        // URL WEB APP GOOGLE APPS SCRIPT SUDAH DIMASUKKAN
         const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbyfKo2JqNiWZZfT2sY8A8psdMjK7LuRpozQE8si96YcK9t6hvYxUBb5FS3hVh8nBAni/exec'; 
 
         let currentUser = null;
@@ -92,12 +96,10 @@
             document.getElementById('app').classList.remove('is-loading');
         }
 
-        // Fungsi Helper untuk memanggil API GAS dengan metode Fetch
         async function fetchAPI(action, payloadData = {}) {
             try {
                 const response = await fetch(GAS_API_URL, {
                     method: 'POST',
-                    // Kita gunakan text/plain untuk membypass masalah CORS Preflight bawaan browser ke GAS
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify({ action: action, ...payloadData })
                 });
@@ -108,20 +110,14 @@
             }
         }
 
-        // --- 1. FITUR LOGIN ---
         async function doLogin() {
             const user = document.getElementById('username').value;
             const pin = document.getElementById('pin').value;
 
             if(!user || !pin) return alert('Silakan isi NIK dan PIN terlebih dahulu.');
 
-            if(GAS_API_URL === 'ISI_DENGAN_URL_WEB_APP_GAS_KAMU') {
-                return alert('Developer Error: URL GAS_API_URL belum diisi di kode HTML!');
-            }
-
             showLoading('Memverifikasi Identitas...');
             
-            // Panggil API Backend
             const result = await fetchAPI('login', { username: user, pin: pin });
             
             hideLoading();
@@ -146,7 +142,6 @@
             document.getElementById('login-view').classList.remove('hidden');
         }
 
-        // --- 2. FITUR KUNCI LOKASI (GEOLOCATION API) ---
         function initGPS() {
             const gpsStatus = document.getElementById('gps-status');
             const btnScan = document.getElementById('btn-scan');
@@ -177,7 +172,6 @@
             }
         }
 
-        // --- 3. FITUR LIVE SCANNER ---
         function startScanner() {
             if(!currentLat || !currentLng) return alert('Lokasi (GPS) belum terkunci!');
 
@@ -209,12 +203,10 @@
             }
         }
 
-        // --- 4. KIRIM DATA KE SERVER ---
         async function onScanSuccess(decodedText, decodedResult) {
             stopScanner();
             showLoading('Mencatat Data Patroli...');
 
-            // Rangkai nilai koordinat menjadi format link Google Maps
             const urlGoogleMaps = `https://www.google.com/maps?q=${currentLat},${currentLng}`;
 
             const payload = {
@@ -224,7 +216,7 @@
                     qrCode: decodedText, 
                     lat: currentLat,    
                     lng: currentLng,
-                    mapsUrl: urlGoogleMaps // Masukkan link ke dalam payload
+                    mapsUrl: urlGoogleMaps
                 }
             };
 
