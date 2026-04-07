@@ -258,31 +258,57 @@
         }
 
         async function onScanSuccess(decodedText, decodedResult) {
+            // 1. Matikan scanner dulu agar kamera tidak berat
             stopScanner();
-            showLoading('Menyimpan Data Patroli...');
-
-            const urlGoogleMaps = `https://www.google.com/maps?q=${currentLat},${currentLng}`;
-
-            const payload = {
-                data: {
-                    username: currentUser.username,
-                    nama: currentUser.nama,
-                    qrCode: decodedText, 
-                    lat: currentLat,    
-                    lng: currentLng,
-                    mapsUrl: urlGoogleMaps
-                }
-            };
-
-            const result = await fetchAPI('submitPatrol', payload);
             
-            hideLoading();
-            if (result.success) {
-                // Gunakan alert browser bawaan atau bisa di-upgrade pakai modal custom
-                alert('✅ ' + result.message);
-            } else {
-                alert('❌ GAGAL: ' + result.message);
-            }
+            // 2. Beritahu user bahwa kita sedang mengambil koordinat baru
+            showLoading('Mencari koordinat presisi tinggi...');
+
+            // 3. PAKSA ambil lokasi paling baru saat ini juga (Abaikan cache)
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    // Ambil koordinat FRESH (Baru)
+                    const freshLat = position.coords.latitude;
+                    const freshLng = position.coords.longitude;
+                    const accuracy = Math.round(position.coords.accuracy);
+
+                    // Update UI loading
+                    showLoading('Menyimpan Data Patroli...');
+
+                    const urlGoogleMaps = `https://www.google.com/maps?q=$${freshLat},${freshLng}`;
+
+                    const payload = {
+                        data: {
+                            username: currentUser.username,
+                            nama: currentUser.nama,
+                            qrCode: decodedText, 
+                            lat: freshLat,    // Gunakan lokasi fresh
+                            lng: freshLng,    // Gunakan lokasi fresh
+                            mapsUrl: urlGoogleMaps
+                        }
+                    };
+
+                    // Kirim ke backend
+                    const result = await fetchAPI('submitPatrol', payload);
+                    
+                    hideLoading();
+                    if (result.success) {
+                        alert(`✅ ${result.message}\n(Koordinat direkam dengan akurasi: ${accuracy} meter)`);
+                    } else {
+                        alert('❌ GAGAL: ' + result.message);
+                    }
+                },
+                (error) => {
+                    // Jika gagal mengambil koordinat fresh
+                    hideLoading();
+                    alert('❌ Gagal mendapatkan lokasi presisi. Pastikan sinyal GPS kuat dan tidak di dalam ruangan tertutup.');
+                },
+                { 
+                    enableHighAccuracy: true, 
+                    maximumAge: 0,     // WAJIB 0: Tolak data lokasi lama/basi
+                    timeout: 15000     // Beri waktu 15 detik untuk mengunci satelit
+                }
+            );
         }
         
         // Tailwind Custom Animations Injector
