@@ -19,67 +19,74 @@
 </head>
 <body class="bg-slate-50 min-h-screen text-slate-800 font-sans flex items-center justify-center sm:p-4">
     
-    <!-- App Container (Mobile App Frame Simulator) -->
     <div id="app" class="w-full max-w-md mx-auto bg-white min-h-screen sm:min-h-[800px] sm:rounded-[2.5rem] sm:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] relative overflow-x-hidden flex flex-col border-0 sm:border-8 border-slate-100">
         
-        <!-- Loading Overlay (Frosted Glass) -->
         <div id="loading" class="absolute inset-0 bg-white/80 backdrop-blur-sm z-50 flex-col justify-center items-center">
             <div class="relative w-16 h-16">
-                <div class="absolute inset-0 rounded-full border-4 border-indigo-100"></div>
-                <div class="absolute inset-0 rounded-full border-4 border-indigo-600 border-t-transparent animate-spin"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-emerald-100"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-emerald-600 border-t-transparent animate-spin"></div>
             </div>
-            <p class="text-indigo-800 font-bold tracking-wide mt-4 animate-pulse" id="loading-text">Memproses...</p>
+            <p class="text-emerald-800 font-bold tracking-wide mt-4 animate-pulse" id="loading-text">Memproses...</p>
         </div>
 
-        <!-- Header -->
-        <header class="bg-gradient-to-br from-indigo-700 to-blue-600 text-white pt-10 pb-8 px-6 text-center rounded-b-3xl shadow-lg relative z-10">
-            <div class="absolute top-0 left-0 w-full h-full overflow-hidden rounded-b-3xl z-0 opacity-20">
+        <header class="bg-gradient-to-br from-emerald-700 to-green-600 text-white pt-12 pb-10 px-6 text-center rounded-b-[3rem] shadow-lg relative z-10">
+            <div class="absolute top-0 left-0 w-full h-full overflow-hidden rounded-b-[3rem] z-0 opacity-20">
                 <div class="absolute -top-10 -right-10 w-40 h-40 bg-white rounded-full blur-3xl"></div>
-                <div class="absolute bottom-0 -left-10 w-32 h-32 bg-blue-300 rounded-full blur-2xl"></div>
+                <div class="absolute bottom-0 -left-10 w-32 h-32 bg-emerald-400 rounded-full blur-2xl"></div>
             </div>
-            <div class="relative z-10">
-                <h1 class="text-3xl font-extrabold tracking-tight">Si Patrol</h1>
-                <p class="text-sm text-indigo-100 mt-1 font-medium tracking-wide">Sistem Patroli Security Bekri</p>
+            
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="mb-4 transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://i.postimg.cc/kXxQshGC/Japfa-Food-Logo.png" 
+                         alt="Logo Japfa" 
+                         class="w-32 h-auto object-contain drop-shadow-2xl">
+                </div>
+                
+                <h1 class="text-4xl font-extrabold tracking-tight drop-shadow-md mb-1">
+                    Si Patrol
+                </h1>
+                
+                <div class="w-12 h-1 bg-orange-400 rounded-full my-2"></div>
+                
+                <p class="text-xs text-emerald-100 font-bold tracking-[0.2em] uppercase opacity-90">
+                    Security Bekri System
+                </p>
             </div>
         </header>
 
-        <!-- HALAMAN LOGIN -->
         <div id="login-view" class="p-6 mt-2 flex-grow flex flex-col z-0">
             <div class="text-center mb-8 mt-4">
                 <h2 class="text-xl font-bold text-slate-800">Selamat Datang,</h2>
-                <p class="text-sm text-slate-500 mt-1">Silakan masuk untuk mulai bertugas.</p>
+                <p class="text-sm text-slate-500 mt-1">Silahkan masuk untuk mulai bertugas.</p>
             </div>
 
             <div class="space-y-5">
                 <div>
                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">NIK / Username</label>
-                    <input type="text" id="username" class="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-2xl p-4 text-sm outline-none focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all duration-300" placeholder="Masukkan NIK Anda">
+                    <input type="text" id="username" class="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-2xl p-4 text-sm outline-none focus:bg-white focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 transition-all duration-300" placeholder="Masukkan NIK Anda">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">PIN Keamanan</label>
-                    <input type="password" id="pin" class="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-2xl p-4 text-sm outline-none focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all duration-300" placeholder="••••••••">
+                    <input type="password" id="pin" class="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-2xl p-4 text-sm outline-none focus:bg-white focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 transition-all duration-300" placeholder="••••••••">
                 </div>
                 
                 <div class="pt-4">
-                    <button onclick="doLogin()" class="w-full bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-bold py-4 px-4 rounded-2xl shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200">
+                    <button onclick="doLogin()" class="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold py-4 px-4 rounded-2xl shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200">
                         Masuk Bertugas
                     </button>
                 </div>
             </div>
             
-            <!-- Watermark -->
             <div class="mt-auto pt-8 pb-2 text-center">
-                <p class="text-[10px] text-slate-400 font-semibold uppercase tracking-[0.2em]">Created by Bang Jay &copy; 2026</p>
+                <p class="text-[10px] text-slate-400 font-semibold uppercase tracking-[0.2em]">Created by Bang Jay © 2026</p>
             </div>
         </div>
 
-        <!-- HALAMAN DASHBOARD / SCANNER -->
         <div id="dashboard-view" class="p-6 hidden flex-col flex-grow">
             
-            <!-- User Card Modern -->
             <div class="bg-white border border-slate-100 rounded-3xl p-5 mb-6 shadow-sm flex items-center gap-4 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-20 h-20 bg-indigo-50 rounded-bl-full -z-0"></div>
-                <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center flex-shrink-0 z-10">
+                <div class="absolute top-0 right-0 w-20 h-20 bg-emerald-50 rounded-bl-full -z-0"></div>
+                <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0 z-10">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                 </div>
                 <div class="z-10">
@@ -88,13 +95,11 @@
                 </div>
             </div>
 
-            <!-- GPS Status Modern Badge -->
-            <div id="gps-status" class="mb-8 p-4 rounded-2xl text-sm text-center font-semibold bg-amber-50 text-amber-600 border border-amber-100 flex items-center justify-center gap-2 transition-colors duration-300">
-                <svg class="animate-spin h-4 w-4 text-amber-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            <div id="gps-status" class="mb-8 p-4 rounded-2xl text-sm text-center font-semibold bg-orange-50 text-orange-600 border border-orange-100 flex items-center justify-center gap-2 transition-colors duration-300">
+                <svg class="animate-spin h-4 w-4 text-orange-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                 Mencari Titik Koordinat...
             </div>
 
-            <!-- Tombol Live Camera -->
             <div class="flex-grow flex flex-col justify-center">
                 <button id="btn-scan" onclick="startScanner()" class="w-full bg-slate-900 text-white font-bold py-5 px-4 rounded-3xl shadow-xl shadow-slate-900/20 hover:bg-slate-800 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 flex flex-col items-center justify-center gap-3 opacity-50 cursor-not-allowed" disabled>
                     <div class="bg-white/20 p-3 rounded-2xl backdrop-blur-sm">
@@ -106,10 +111,9 @@
                 </button>
             </div>
 
-            <!-- Area Tampilan Kamera Scanner -->
-            <div id="reader-container" class="hidden relative bg-slate-900 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-slate-900/10 mb-6">
+            <div id="reader-container" class="hidden relative bg-slate-900 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-orange-500/30 mb-6">
                 <div id="reader" class="w-full"></div>
-                <div class="absolute inset-0 pointer-events-none border-[6px] border-indigo-500/30 rounded-3xl z-10"></div>
+                <div class="absolute inset-0 pointer-events-none border-[6px] border-orange-500/50 rounded-3xl z-10"></div>
                 <button onclick="stopScanner()" class="absolute bottom-5 left-1/2 transform -translate-x-1/2 bg-white/10 backdrop-blur-md text-white font-bold py-3 px-8 rounded-full border border-white/20 shadow-lg hover:bg-white/20 transition-all z-20">
                     Batalkan
                 </button>
@@ -123,12 +127,11 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
     <script>
         // ==========================================
         // KONFIGURASI API BACKEND
         // ==========================================
-        const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbyfKo2JqNiWZZfT2sY8A8psdMjK7LuRpozQE8si96YcK9t6hvYxUBb5FS3hVh8nBAni/exec'; 
+        const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbyGe7o_GmnIBydrE8u0h0zG0C3NdavzpaHlW_Mr1_5wkZAadts8h63N_fhzhknUgP4/exec'; 
 
         let currentUser = null;
         let currentLat = null;
@@ -162,7 +165,7 @@
             const user = document.getElementById('username').value;
             const pin = document.getElementById('pin').value;
 
-            if(!user || !pin) return alert('Silakan isi NIK dan PIN terlebih dahulu.');
+            if(!user || !pin) return alert('Silahkan isi NIK dan PIN terlebih dahulu.');
 
             showLoading('Memverifikasi...');
             
@@ -275,7 +278,7 @@
                     // Update UI loading
                     showLoading('Menyimpan Data Patroli...');
 
-                    const urlGoogleMaps = `https://www.google.com/maps?q=$${freshLat},${freshLng}`;
+                    const urlGoogleMaps = `https://www.google.com/maps?q=${freshLat},${freshLng}`;
 
                     const payload = {
                         data: {
