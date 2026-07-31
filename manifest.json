@@ -1,0 +1,22 @@
+{
+  "name": "Guard Beef - Security",
+  "short_name": "Guard Beef",
+  "description": "Beef Division Security System Patrol & Handover",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#047857",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://lh3.googleusercontent.com/u/0/d/1SwASLbOfFE2FzT_kjT2rgj2qN3of54Ze",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://lh3.googleusercontent.com/u/0/d/1SwASLbOfFE2FzT_kjT2rgj2qN3of54Ze",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
